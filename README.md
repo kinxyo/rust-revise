@@ -1,7 +1,7 @@
 # rust-revise
 
-Relearning Rust properly, coming from Zig. Not a tutorial repo — a working log of
-projects built to force specific concepts, plus the notes that came out of them.
+Relearning Rust properly, coming from Zig. Not a tutorial repo — a working log of projects
+built to force specific concepts, plus the notes that came out of them.
 
 ## What's here
 
@@ -9,13 +9,14 @@ projects built to force specific concepts, plus the notes that came out of them.
 |---|---|
 | `src/main.rs` | **Project 1** — a terminal file manager (see below) |
 | `notes.md` | The reference that accumulated while building it. The useful artifact. |
+| `ROADMAP.md` | The four-part plan and what each part teaches |
+| `SCANNER_PLAN.md` | Detail on project 2, the recursive file scanner |
 | `RUST_REVISION.md` | The original one-day revision plan |
-| `SCANNER_PLAN.md` | Plan for project 2, the recursive file scanner |
 
 ## Project 1 — terminal file manager
 
-A single-keypress menu over four file operations. Deliberately small; the point was
-the mechanics underneath, not the feature set.
+A single-keypress menu over four file operations. Deliberately small; the point was the
+mechanics underneath, not the feature set.
 
 ```bash
 cargo run
@@ -59,11 +60,8 @@ project; the interesting parts were elsewhere.
 numbers, the `fs::` vs `File` decision, `libc` FFI, bitfield manipulation, cbreak vs raw
 mode, and a running list of the traps actually hit along the way.
 
-## Next
+## What's next
 
-**Project 2** — recursive file scanner (`SCANNER_PLAN.md`): walk a tree, classify files by
-magic bytes rather than extension, survive per-file errors, then parallelize with a bounded
-worker pool. That's where `Send`/`Sync`/`Arc`/channels live.
-
-**Project 3** — put it behind an HTTP API with axum, so the scan runs as a background job.
-That's where async, `spawn_blocking`, cancellation, and graceful shutdown live.
+See `ROADMAP.md`. Short version: a scanner engine (threads, `Send`/`Sync`, channels), then
+an HTTP service wrapping it (async, `spawn_blocking`, shutdown), then real image work on
+top.

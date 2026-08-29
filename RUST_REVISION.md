@@ -1,4 +1,4 @@
-# Rust in One Day — Revision Plan for `aftershoot`
+# Rust in One Day — Revision Plan
 
 A one-day path from "I've forgotten most of it" to "I can start building." Each block is
 **read briefly → drill in code → move on**. Do not read passively; the recall comes from typing.
@@ -9,8 +9,7 @@ Total: ~9 hours with breaks. Blocks 1–4 are the language. Block 5 is the proje
 
 ## Hour 0 — Setup (15 min)
 
-Rust is **not currently installed** on this machine (no `rustc`, `cargo`, or `rustup` on PATH;
-`~/.cargo` does not exist). The `target/` dir and `Cargo.lock` in this repo are stale leftovers.
+If Rust isn't installed yet:
 
 ```bash
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
@@ -24,7 +23,7 @@ cargo install rustlings          # used in Block 1
 Sanity check the existing crate (it's `edition = "2024"`, so you need a recent toolchain):
 
 ```bash
-cd ~/Work/aftershoot && cargo run
+cargo run
 ```
 
 Commands you'll live in all day:
@@ -378,7 +377,7 @@ hash a slice of files and report over a channel to a main-thread progress printe
 
 ## Block 5 — The Project Concepts (2h)
 
-Now map the language onto what `aftershoot` actually has to do. This is the part that
+Now map the language onto what the project actually has to do. This is the part that
 turns revision into a head start.
 
 ### 5.1 Local-first processing
@@ -626,7 +625,7 @@ Anything you can't answer, go back to that block.
 
 ---
 
-## Crate shortlist for `aftershoot`
+## Crate shortlist
 
 ```toml
 [dependencies]

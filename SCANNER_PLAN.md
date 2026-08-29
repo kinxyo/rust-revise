@@ -1,6 +1,6 @@
 # Current Goal
 
-**A recursive directory scanner that classifies files by their magic bytes.** Not a toy — it's literally stage one of aftershoot, so you keep it.
+**A recursive directory scanner that classifies files by their magic bytes.** Not a toy — it's stage one of the real project, so you keep it.
 
 Filesystem code is the ideal Rust teacher because it's saturated with exactly the things Rust makes you decide:
 
