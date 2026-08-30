@@ -1,19 +1,18 @@
 # rust-revise
 
-Relearning Rust properly, coming from Zig. Not a tutorial repo — a working log of projects
-built to force specific concepts, plus the notes that came out of them.
+Getting back into Rust after time away, coming from Zig. Not a tutorial repo — a small
+project built to force real decisions, plus the notes that came out of building it.
 
 ## What's here
 
 | Path | What it is |
 |---|---|
-| `src/main.rs` | **Project 1** — a terminal file manager (see below) |
-| `notes.md` | The reference that accumulated while building it. The useful artifact. |
-| `ROADMAP.md` | The four-part plan and what each part teaches |
-| `SCANNER_PLAN.md` | Detail on project 2, the recursive file scanner |
-| `RUST_REVISION.md` | The original one-day revision plan |
+| `src/` | A terminal file manager (see below) |
+| `notes.md` | The reference that accumulated while building it — the useful artifact |
+| `RUST_REVISION.md` | The original revision plan the work started from |
+| `SCANNER_PLAN.md` | A staged plan for a follow-on scanner project |
 
-## Project 1 — terminal file manager
+## The project — terminal file manager
 
 A single-keypress menu over four file operations. Deliberately small; the point was the
 mechanics underneath, not the feature set.
@@ -35,8 +34,19 @@ q) Exit.
 
 - **Create** — write content to a new file
 - **Read** — print contents, with a countdown before returning to the menu
-- **Update** — opens `$EDITOR` (falls back to `$VISUAL`, then `vi`)
+- **Update** — open `$EDITOR` (falls back to `$VISUAL`, then `vi`)
 - **Delete** — remove the file
+
+### Layout
+
+```
+src/
+├── main.rs      module wiring + the input loop
+├── menu.rs      the Menu enum, Display, byte-to-variant parsing
+├── files.rs     the four file operations
+├── termios.rs   cbreak mode via libc
+└── utils.rs     cls, prompt
+```
 
 ### What it exercises
 
@@ -48,6 +58,7 @@ q) Exit.
 - **cbreak mode by hand** — clearing `ICANON` and `ECHO` only, rather than full raw mode,
   so `Ctrl-C` and `println!` keep working
 - Spawning a child process that inherits the terminal (`Command::status`)
+- Splitting a single file into modules — `mod` vs `use`, visibility, path prefixes
 
 Unix only — termios doesn't exist on Windows.
 
@@ -58,10 +69,4 @@ project; the interesting parts were elsewhere.
 
 `notes.md` is the real output of this repo. It covers ownership and moves with measured
 numbers, the `fs::` vs `File` decision, `libc` FFI, bitfield manipulation, cbreak vs raw
-mode, and a running list of the traps actually hit along the way.
-
-## What's next
-
-See `ROADMAP.md`. Short version: a scanner engine (threads, `Send`/`Sync`, channels), then
-an HTTP service wrapping it (async, `spawn_blocking`, shutdown), then real image work on
-top.
+mode, the module system, and a running list of the traps actually hit along the way.
